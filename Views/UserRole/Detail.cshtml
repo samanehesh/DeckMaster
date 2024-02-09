@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DECKMASTER.ViewModels.RoleVM>
+
+@{
+    ViewData["Title"] = "User Roles Detail";
+    string message = ViewBag.Message;
+}
+
+<h3 style="color:#6E0B14; ">User: @ViewBag.FullName</h3>
+@if (message.Length > 0)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
+
+<p>
+    @Html.ActionLink( "Assign Roles", "Create", new { userName = @ViewBag.UserName }, new { style = "color: #6E0B14;" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th style ="color:#6E0B14; ">@Html.DisplayNameFor(model => model.RoleName)</th>
+            <th style ="color:#6E0B14; ">Action </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
+                <td>@Html.ActionLink( "Delete Role", "Delete", new { roleName = item.RoleName,userName = @ViewBag.UserName }, new { style = "color: #6E0B14;" })</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* <tr>
+    <td>@item.Email</td>
+    <td>
+        @Html.ActionLink( "View Roles", "Detail", new { userName = item.Email })
+
+    </td>
+</tr> *@
+

@@ -1,0 +1,14 @@
+﻿@model DECKMASTER.Models.PayPalConfirmation
+@{
+    ViewData["Title"] = "Payment Confirmation";
+}
+
+<h2 style ="border-color:#6E0B14;">Payment Confirmation</h2>
+<div>
+    <p>Thank you for your payment!</p>
+    <p>Transaction ID: @Model.TransactionId</p>
+    <p>Amount Paid: $@Model.Amount</p>
+    <p>Payer Name: @Model.PayerName</p>
+    <p>Payer Email: @Model.PayerEmail</p>
+</div>
+

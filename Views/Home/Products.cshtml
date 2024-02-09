@@ -1,0 +1,235 @@
+﻿@model IEnumerable<DECKMASTER.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div b-6eg8tbgho9="" style="text-align: center;">
+    <strong b-6eg8tbgho9="" style="line-height: 1em; color:#8B0000;">
+        <span b-6eg8tbgho9="" style="font-size: 2em;">D</span><span b-6eg8tbgho9="" style="font-size: 1.6em;">ECK</span>
+        <span b-6eg8tbgho9="" style="font-size: 2em;">M</span><span b-6eg8tbgho9="" style="font-size: 1.6em;">ASTER</span>
+    </strong>
+    <div b-6eg8tbgho9="" style="font-size: 1.5em; line-height: .6em; color:#8B8B8B;">You won't find better</div>
+</div>
+
+<hr b-6eg8tbgho9="">
+
+<table class="table">
+    <tbody>
+        <tr style="height:20px;"></tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="min-width:150px;"></td>
+                <td>
+                    <div>
+                        <img src="~/images/@item.ImageName" style="max-width:250px;">
+                        <div style="color:#CC0000; font-size: 1.7em;text-align: center;">
+                            <span>$</span>
+                            <span id="itemPrice_@item.ID">@item.Price</span>
+                            <span id="currency">USD</span>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <div style="padding-top:20px;font-size:larger;">@item.Description</div>
+                </td>
+
+                <td style="min-width:350px; margin-left: 50px; margin-top:20px">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        decimal price;
+                        decimal.TryParse(item.Price, out price);
+                        int i = item.ID;
+                        <div style="margin-left: 50px; margin-top:20px;">
+
+                            <button  class="btn" style="border-color:#6E0B14; background-color: #6E0B14; color:white;margin-bottom:5px;width:157px;" onclick="addToCart(@i)">
+                                Add To Cart
+                            </button>
+                            <br>
+                            <button class="btn" style="border-color:grey; background-color:grey;color:white;" onclick="removeFromCart(@i)">
+                                Remove From Cart
+                            </button>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>QTY</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="quantity_@item.ID">0</td>
+                                        <td>$<span id="amount_@item.ID">0</span> @item.Currency</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    }
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+</table>
+@if (User.Identity.IsAuthenticated)
+{
+    <div style="margin-left:1000px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Items</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="itemNumbers">0</td>
+                    <td>$<span id="itemPrice">0</span> CAD</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    
+}
+
+
+
+<script>
+
+    function addToCart(id) {
+
+        var quantityElement = document.getElementById('quantity_' + id).innerText;
+        var quantity = parseInt(quantityElement,10);
+
+        quantity ++;
+        document.getElementById('quantity_' + id).innerText = quantity;
+
+
+        var priceElement = document.getElementById('itemPrice_' + id).innerText;
+        var price = parseFloat(priceElement);
+
+
+        var amount = quantity * price;
+        document.getElementById('amount_' + id).innerText = amount.toFixed(2);
+
+        var itemNumbersElement = document.getElementById('itemNumbers').innerText;
+        var itemNumbers = parseInt(itemNumbersElement, 10);
+        itemNumbers++;
+        document.getElementById('itemNumbers').innerText = itemNumbers;
+
+        var totalItemPriceElement = document.getElementById('itemPrice').innerText;
+        var itemPrice = parseFloat(totalItemPriceElement);
+
+        itemPrice = itemPrice + price
+        document.getElementById('itemPrice').innerText = itemPrice.toFixed(2);
+    }
+
+    function removeFromCart(id){
+        var quantity = document.getElementById('quantity_' + id).innerText;
+            if (quantity > 0) {
+                quantity--;
+            document.getElementById('quantity_' + id).innerText = quantity;
+
+            var price = document.getElementById('itemPrice_' + id).innerText;
+            var amount = quantity * price;
+            document.getElementById('amount_' + id).innerText = amount.toFixed(2);
+            var itemNumbers = document.getElementById('itemNumbers').innerText;
+            itemNumbers--;
+            document.getElementById('itemNumbers').innerText = itemNumbers;
+
+            var itemPrice = document.getElementById('itemPrice').innerText;
+            itemPrice = itemPrice - price
+            document.getElementById('itemPrice').innerText = itemPrice.toFixed(2);
+            }
+    }
+
+</script>
+
+
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="form-group" style="margin-left:290px;">
+        <button class="btn btn-primary" style="border-color:#6E0B14; background-color: #6E0B14;" onclick="location.href='/Identity/Account/Login'">
+            Login to Purchase
+        </button>
+    </div>
+    
+}
+
+
+
+<br />
+@if (User.Identity.IsAuthenticated)
+{
+    <div id="paypal-button-container" style="display:flex; margin:0 auto; width:300px;">
+        @* <img src="~/images/PayPal.png" style="max-width:120px;"> Check Out *@
+
+    </div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=ARYq2Rg-jYOjPcDOCOc3nBIKoNN3z5qvLjVNrX1WWC2IaBP2Zl9ORhhcGXBdgElh4LUwxGla9SQ7rSAN"></script> 
+}
+    <script>
+        paypal.Buttons({
+        // Set up the transaction
+        createOrder: function (data, actions) {
+                console.log("-------------------------------------------------");
+                console.log("itemPrice ==> " + document.getElementById('itemPrice').innerText);
+                console.log("currency ==> " + document.getElementById('currency').innerText);
+                return actions.order.create({
+        purchase_units: [{
+        amount: {
+        value: document.getElementById('itemPrice').innerText,
+        currency: document.getElementById('currency').innerText
+        }
+        }]
+        });
+        },
+
+
+        // Finalize the transaction
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                // Check if payment status is completed and payment method is available
+                // if (details.status === 'COMPLETED' && details.purchase_units[0].payments.captures[0].payment_method) {
+                    // Redirect to the PayPalConfirmation action method with payment method
+                    window.location.href =
+                        '/Home/PayPalConfirmation?TransactionId=' +
+                        encodeURIComponent(details.id) + '&Amount=' +
+                        encodeURIComponent(details.purchase_units[0].amount.value) + '&PayerName=' +
+                        encodeURIComponent(details.payer.name.given_name) + '&PayerEmail=' +
+                        encodeURIComponent(details.payer.email_address) + '&PaymentMethod=' +
+                        encodeURIComponent(details.purchase_units[0].payments.captures[0].payment_method);
+                // } else {
+                //     // Handle the case where payment status is not completed or payment method is not available
+                //     console.error('Payment capture failed or payment method not available.');
+                // }
+            });
+        },
+
+
+        onCancel: function (data) {
+        alert('Transaction was cancelled.');
+        },
+        onError: function (err) {
+        alert('An error occurred during the transaction.');
+        },
+        style: {
+        layout: 'vertical', // 'vertical', 'horizontal'
+        color: 'blue',      // 'gold', 'blue', 'silver', 'black'
+        shape: 'rect',      // 'rect', 'pill'
+        label: 'paypal'     // 'checkout', 'pay', 'buynow', 'paypal'
+        }
+        }).render('#paypal-button-container');
+    </script> 
+
+

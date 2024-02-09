@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DECKMASTER.ViewModels.RoleVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string message = @ViewBag.Message;
+
+}
+
+<h1 style="color:#6E0B14; ">Roles</h1>
+
+@if (message.Contains("Error"))
+{
+    <div class="text-danger" role="alert">
+        @ViewBag.Message
+    </div>
+}
+else if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+
+
+}
+
+<p>
+    <a asp-action="Create" style="color:#6E0B14; ">Create New Role</a>
+</p>
+<table class="table" >
+    <thead>
+        <tr>
+            <th style="color:#6E0B14; ">
+                @Html.DisplayNameFor(model => model.RoleName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+            <td>
+                @* <a asp-action="Edit" asp-route-id="@item.RoleName">Edit</a> | *@
+                @* <a asp-action="Details" asp-route-id="@item.RoleName">Details</a> | *@
+                    <a asp-action="Delete" asp-route-roleName="@item.RoleName" style="color:#6E0B14; ">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+﻿@model DECKMASTER.ViewModels.RoleVM
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="color:#6E0B14; ">Delete</h1>
+
+<h3 style="color:#6E0B14; ">Are you sure you want to delete this?</h3>
+<div>
+    <h4 style="color:#6E0B14; ">@Model.RoleName Role</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-antiforgery="true" />
+        <input asp-for="RoleName" value=@Model.RoleName type="hidden" />
+        <input type="submit" value="Delete" class="btn" style="background-color:#6E0B14; color:white;" /> |
+        <a asp-action="Index" style="color:#6E0B14; ">Back to Roles</a>
+    </form>
+</div>

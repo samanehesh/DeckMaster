@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var firstName = Context.Session.GetString("SessionUserName");
+    var helloLink = firstName != null ?
+    string.Format("Hello {0}!", firstName) : "";
+}
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="color:#D9D9D9 !important; font-size:1em !important;font-weight: bold;">@helloLink</a>
+
+    </li>
+    <li class="nav-item">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark" style="color:#D9D9D9 !important; font-size: 1em !important; font-weight: bold;">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register" style="color:#D9D9D9 !important; font-size: 1em !important; font-weight: bold;">Register</a>
+    </li>
+    <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login" style="color:#D9D9D9 !important; font-size: 1em !important; font-weight: bold;">Login</a>
+    </li>
+}
+</ul>

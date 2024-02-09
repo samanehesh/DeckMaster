@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div b-6eg8tbgho9="" class="container">
+    <div b-6eg8tbgho9="" style="text-align: center;">
+        <strong b-6eg8tbgho9="" style="line-height: 1em; color:#8B0000;">
+            <span b-6eg8tbgho9="" style="font-size: 2em;">D</span><span b-6eg8tbgho9="" style="font-size: 1.6em;">ECK</span>
+            <span b-6eg8tbgho9="" style="font-size: 2em;">M</span><span b-6eg8tbgho9="" style="font-size: 1.6em;">ASTER</span>
+        </strong>
+        <div b-6eg8tbgho9="" style="font-size: 1.5em; line-height: .6em; color:#8B8B8B;">You won't find better</div>
+    </div>
+    <hr b-6eg8tbgho9="">
+    <main b-6eg8tbgho9="" role="main" class="pb-3">
+
+        <div>
+            <div class="row">
+                <div class="offset-2 col-sm-1">
+                    <div class="d-none d-lg-block" style="text-align: right;padding-top:55px; opacity: 0.08;">
+                        <img src="~/images/CardSymbols.png" alt="scattered cards" style="max-width: 70%;">
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-lg-6" style="padding-top: 40px;padding-left: 20px;">
+                    <h5>Welcome to Deck Master!</h5>
+
+                    <p>
+                        We specialize in providing high-quality decks of cards for all your gaming and card collecting needs.
+                        Our online store offers a wide variety of decks, from standard playing cards to collectible and limited edition decks.
+                    </p>
+                    <p>
+                        Our decks are made with durable materials and feature stunning designs, making them perfect for both casual and serious players.
+                        We also offer custom deck printing services to help you create your own personalized deck.
+                    </p>
+                    <p>Thank you for choosing Deck Master for all your card needs. Shop now and discover the perfect deck for you!</p>
+                </div>
+                <div class="col-sm-1">
+                    <div class="d-none d-lg-block" style="text-align: right;padding-top:55px; opacity: 0.08;">
+                        <img src="~/images/CardSymbols.png" alt="scattered cards" style="max-width: 70%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="form-group" style="display:flex; justify-content:center;">
+                <button class="btn" style="border-color:#6E0B14; background-color: #6E0B14;color:white;" onclick="location.href='/Identity/Account/Login'">
+                    Shop Now
+                </button>
+            </div>
+
+        }
+    </main>
+</div>
+

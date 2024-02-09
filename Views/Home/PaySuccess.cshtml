@@ -1,0 +1,120 @@
+﻿@model IEnumerable<DECKMASTER.Models.IPN>
+
+@{
+    ViewData["Title"] = "PaySuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>PaySuccess</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.custom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.create_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.payerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.payerFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.payerLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.payerMiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.payerEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.payerCountryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.payerStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.intent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.paymentMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.paymentState)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.custom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.create_time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.payerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.payerFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.payerLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.payerMiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.payerEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.payerCountryCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.payerStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.intent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.paymentMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.paymentState)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.paymentID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.paymentID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.paymentID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

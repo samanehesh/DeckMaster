@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DECKMASTER.ViewModels.UserVM>
+
+@{
+    ViewData["Title"] = "User Roles";
+}
+
+@* <h1 style="color:#6E0B14; ">User Roles</h1> *@
+@* <p>
+    <a asp-action="Create" style="color:#6E0B14; ">Create New User Role</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th style="color:#6E0B14; ">Users</th>
+            <th><a asp-action="Create" style="color:#6E0B14; ">Create New User Role</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Email</td>
+                <td>
+                    @Html.ActionLink( "View Roles", "Detail", new { userName = item.Email }, new { style = "color: #6E0B14;" })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
